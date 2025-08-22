@@ -3,10 +3,19 @@ import MobilePhone from '../models/device.js';
 
 const router = express.Router();
 
-router.get('/:brand?', async (req, res) => {
+router.get('/', async (req, res) => {
   try {
-    const query = req.params.brand ? { brand: req.params.brand } : {};
-    const mobilephones = await MobilePhone.find(query);
+    const mobilephones = await MobilePhone.find();
+    res.status(200).json({ message: 'ok', mobilephones });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'DB error' });
+  }
+});
+
+router.get('/:brand', async (req, res) => {
+  try {
+    const mobilephones = await MobilePhone.find({ brand: req.params.brand });
     res.status(200).json({ message: 'ok', mobilephones });
   } catch (err) {
     console.error(err);

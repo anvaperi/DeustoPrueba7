@@ -5,7 +5,7 @@ const MobilePhoneSchema =  new mongoose.Schema({
   model: String
 }, {
   versionKey: false,
-  collection: 'mobilephones'
+  collection: 'devices'
 });
 
 export default mongoose.model('MobilePhone', MobilePhoneSchema);
